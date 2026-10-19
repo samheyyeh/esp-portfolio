@@ -1,0 +1,747 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Sam's Creative Mindsets Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a side-scrolling drone flight over seven stops, with the written story for each stop in a card under the scene. */
+:root {
+  --bg: #eef1f4;
+  --surface: #ffffff;
+  --fg: #0f1a24;
+  --muted: #4c5b69;
+  --line: #c7d1da;
+  --accent: #1b4fd6;
+  --accent-ink: #ffffff;
+  --accent-soft: #dfe8fb;
+  --sky-a: #cfe0f3;
+  --sky-b: #f1f5f9;
+  --hill: #b9cbdc;
+  --ground: #9db3c6;
+  --prop: #5f7388;
+  --rock: #7a8ea0;
+  --court: #3f8f6b;
+  --canyon: #1d2a36;
+  --pad: #46586a;
+  --cloud: #ffffff;
+  --warn: #c2410c;
+  --ok: #15803d;
+  --ball: #c8d82b;
+  --display: 'Archivo', system-ui, 'Helvetica Neue', Arial, sans-serif;
+  --body: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c141c;
+    --surface: #131e29;
+    --fg: #e8eef4;
+    --muted: #9db0c1;
+    --line: #263646;
+    --accent: #7aa2ff;
+    --accent-ink: #0c141c;
+    --accent-soft: #1b2c4a;
+    --sky-a: #0a1220;
+    --sky-b: #1a2b44;
+    --hill: #223650;
+    --ground: #1b2a3a;
+    --prop: #3a5068;
+    --rock: #34495f;
+    --court: #2f7a5b;
+    --canyon: #05090e;
+    --pad: #55708a;
+    --cloud: #2a3f5c;
+    --warn: #ff8a4c;
+    --ok: #4cc38a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c141c;
+  --surface: #131e29;
+  --fg: #e8eef4;
+  --muted: #9db0c1;
+  --line: #263646;
+  --accent: #7aa2ff;
+  --accent-ink: #0c141c;
+  --accent-soft: #1b2c4a;
+  --sky-a: #0a1220;
+  --sky-b: #1a2b44;
+  --hill: #223650;
+  --ground: #1b2a3a;
+  --prop: #3a5068;
+  --rock: #34495f;
+  --court: #2f7a5b;
+  --canyon: #05090e;
+  --pad: #55708a;
+  --cloud: #2a3f5c;
+  --warn: #ff8a4c;
+  --ok: #4cc38a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 980px; margin-inline: auto; }
+
+.eyebrow, .tag, .chip, .nm, .bubt {
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.eyebrow { font-size: 0.75rem; color: var(--muted); margin: 0 0 14px; }
+h1 {
+  font-family: var(--display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+  text-wrap: balance;
+}
+.lede { color: var(--muted); max-width: 40em; margin: 0 0 24px; }
+
+/* Scene */
+.stage { position: relative; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--sky-b); }
+.hud {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: min(42%, 340px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.hud .tag { margin: 0 0 6px; }
+.hud-line {
+  font-family: var(--display);
+  font-stretch: 112%;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.25;
+  margin: 0;
+  text-wrap: balance;
+}
+@media (max-width: 700px) {
+  .hud { position: static; width: auto; border: 0; border-top: 1px solid var(--line); border-radius: 0; padding: 12px 16px; }
+  .hud-line { font-size: 1rem; }
+}
+svg.scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: linear-gradient(var(--sky-a), var(--sky-b));
+}
+.far { fill: var(--hill); }
+.cloud { fill: var(--cloud); opacity: 0.75; }
+.ground { fill: var(--ground); }
+.prop { fill: var(--prop); }
+.rock { fill: var(--rock); }
+.court { fill: var(--court); }
+.canyon { fill: var(--canyon); }
+.pad { fill: var(--pad); }
+.win { fill: var(--sky-b); opacity: 0.8; }
+.ball { fill: var(--ball); }
+.sign-text { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; fill: #ffffff; }
+.paper { fill: var(--surface); stroke: var(--accent); stroke-width: 1.5; }
+.foil { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+
+.p.stranded { color: var(--warn); }
+.p.ok { color: var(--ok); }
+.fig { stroke: currentColor; stroke-width: 3; stroke-linecap: round; fill: none; }
+.bub { fill: var(--surface); stroke: var(--line); stroke-width: 1; }
+.bubt { fill: var(--fg); font-size: 10px; }
+.nm { fill: var(--fg); font-size: 10px; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.arm { transform-box: fill-box; transform-origin: 0% 100%; }
+.stranded .arm { animation: wave 0.5s ease-in-out infinite alternate; }
+@keyframes wave { from { transform: rotate(-16deg); } to { transform: rotate(16deg); } }
+
+.d-body { fill: var(--accent); }
+.d-arm { stroke: var(--fg); stroke-width: 3; stroke-linecap: round; }
+.d-cam { fill: var(--fg); }
+.rotor { fill: var(--fg); opacity: 0.55; transform-box: fill-box; transform-origin: center; animation: spin 0.14s linear infinite alternate; }
+.landed .rotor { animation: none; opacity: 0.8; }
+@keyframes spin { from { transform: scaleX(1); } to { transform: scaleX(0.3); } }
+.tether { stroke: var(--fg); stroke-width: 2; stroke-dasharray: 4 3; }
+.crate { fill: var(--warn); stroke: var(--fg); stroke-width: 1.5; }
+
+/* Controls */
+.controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; align-items: center; }
+button {
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--fg);
+  cursor: pointer;
+}
+button:hover:not(:disabled) { background: var(--accent-soft); }
+button:disabled { opacity: 0.45; cursor: default; }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button.primary:hover:not(:disabled) { background: var(--accent); filter: brightness(1.08); }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.stops { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.stops button { font-size: 0.82rem; padding: 6px 10px; }
+.stops button[aria-current="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+/* Card */
+.card {
+  margin-top: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 26px 28px 22px;
+}
+.tag { font-size: 0.75rem; color: var(--accent); margin: 0 0 10px; }
+h2 {
+  font-family: var(--display);
+  font-stretch: 112%;
+  font-weight: 750;
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  line-height: 1.12;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+.card p { margin: 0 0 14px; max-width: 40rem; }
+.card p.big { font-size: 1.2rem; font-weight: 500; line-height: 1.4; }
+.chip {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 5px 10px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.card h3, #all h3 {
+  font-family: var(--display);
+  font-stretch: 108%;
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.25;
+  margin: 24px 0 8px;
+}
+.tl { list-style: none; margin: 0 0 18px; padding: 0; border-left: 2px solid var(--line); max-width: 40rem; }
+.tl li { position: relative; display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 4px 16px; padding: 10px 0 10px 18px; }
+.tl li::before { content: ""; position: absolute; left: -6px; top: 17px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.tl .when { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; color: var(--accent); padding-top: 2px; }
+@media (max-width: 560px) { .tl li { grid-template-columns: minmax(0, 1fr); } }
+.card ul, #all ul { margin: 0 0 16px; padding-left: 1.2em; max-width: 40rem; }
+.card li, #all li { margin-bottom: 6px; }
+#all { margin-top: 28px; border-top: 1px solid var(--line); }
+#all article { padding-block: 26px; border-bottom: 1px solid var(--line); }
+#all p { margin: 0 0 14px; max-width: 40rem; }
+
+.ai {
+  margin-top: 28px;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+}
+.ai h3 { font-family: var(--display); font-stretch: 108%; font-size: 1.1rem; margin: 0 0 8px; }
+.ai p { margin: 0 0 10px; max-width: 42rem; font-size: 0.97rem; }
+footer {
+  margin-top: 28px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+@media (max-width: 560px) {
+  .card { padding: 20px 18px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">ESP 103 &middot; Creative Mindsets Portfolio &middot; Fall 2026</p>
+  <h1>Six weeks of ESP 103, flown by drone</h1>
+  <p class="lede">I build wings for drones, so I flew my portfolio. Each stop is a moment from this class where someone needed help.</p>
+
+  <div class="stage">
+    <svg id="scene" class="scene" viewBox="0 0 900 450" role="img" aria-label="A drone flies across a landscape and stops at seven places from my first six weeks of ESP 103. The story for each stop is written in the card below."></svg>
+    <div class="hud" id="hud"></div>
+  </div>
+
+  <div class="controls">
+    <button type="button" id="back">Back</button>
+    <button type="button" id="next" class="primary">Fly to the first stop</button>
+    <button type="button" id="readall">Skip the flight and read everything</button>
+  </div>
+  <nav class="stops" id="stops" aria-label="Jump to a stop"></nav>
+
+  <article class="card" id="card" aria-live="polite"></article>
+
+  <section id="all" hidden></section>
+
+  <section class="ai">
+    <h3>How I used AI</h3>
+    <p>I shared my deep reflection on the first six weeks of ESP 103 using Wispr Flow, and had Claude build the drone simulation.</p>
+    <p>Claude also turned my Wispr Flow reflection into the first draft of the text on this page. It cleaned up and reworded what I said so it reads more professionally, organized it, and pulled the FlexForm timeline from my earlier notes.</p>
+  </section>
+</div>
+
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var RM = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  var STOPS = [
+    {
+      name: 'Takeoff', title: 'Takeoff', mindset: 'Where I started', mode: 'land', person: null,
+      body: [
+        "I'm Sam, and I'm the co-founder of FlexForm Aeronautics, a company that builds morphing wings for drones. Since I run a drone company, it made sense to build my portfolio as a drone flight. Each stop is a moment from the first six weeks of ESP 103 where someone needed help, and what I learned by getting there.",
+        "Here's the context. FlexForm started before this class, so for these six weeks I was doing two things at once: taking ESP 103 and running a real company. A lot of this portfolio is about what happened when those two things didn't line up.",
+        "I'll say up front that I'm not going to pretend this class was a perfect fit for me. I got real things out of it, and I also have real criticisms, and I think both belong in an honest portfolio.",
+        "Hit the button under the scene to fly to the first stop. If you'd rather just read it, there's a button for that too."
+      ]
+    },
+    {
+      name: '10 Days', title: 'The 10 Days', mindset: 'Creativity', mode: 'rescue', person: 'Me, in office hours', sign: 'Nothing new?',
+      payload: 'something I could point to',
+      body: [
+        { h: 'What I did' },
+        "For my 10 Days of Creativity I worked on FlexForm. The company was already running, so my plan was to move it forward as far as I could in 10 days. In that time I got new clients, I made revenue, I built new relationships with clients and VCs, and I made improvements to the pitch deck.",
+        { big: "The grade said I didn't create anything new." },
+        { h: 'Where I disagree' },
+        "Technically I didn't build a brand new product in those 10 days, and I'll admit that. But I don't think that means I didn't create anything. Relationships with clients and VCs didn't exist before, and revenue didn't exist before, and now they do. I strongly believe that counts as something that was created, and for a startup I think those are the things that matter most.",
+        { h: 'Where the grade has a point' },
+        "I will say the assignment asked for something you could point to, and a relationship is hard to point to. I didn't do a good job of showing what I made, and I think that's on me. The pitch deck changes were the one thing I could have shown, and the pitch deck is also somewhere I'm still struggling in this class, because I'm not always sure what counts as progress here.",
+        { h: 'The most uncomfortable moment' },
+        "The most uncomfortable moment of this class was pitching my 10 Days work in office hours. I knew I had done a lot for my company, and based on the rubric I felt like I hadn't done anything. That's a strange feeling, because in my real life I was making more progress than I ever had, and in this class it didn't seem to count.",
+        { h: 'What I took from it' },
+        "I did learn what creativity means and how to apply it, and I have applied it. It just didn't grade well. What I took from that is that doing the work and showing the work are two different skills. I'm strong at the first one, and I'm still learning the second one."
+      ]
+    },
+    {
+      name: 'Creativity', title: 'Creativity or execution?', mindset: 'Curiosity', mode: 'rescue', person: 'Me, with a pitch deck', sign: 'Which is it?',
+      payload: 'a way to tell the two apart',
+      body: [
+        "This is the question I keep coming back to, and I still don't think I have it completely figured out. I wanted to know how you tell creativity from execution, and what to call it when it's both.",
+        { h: 'The test I use' },
+        "Creativity is deciding what to make or how to say it. Execution is doing it well and then doing it again. Most real work is a mix, so I ask which one was the harder part in that moment.",
+        { h: 'How it looked on FlexForm' },
+        { ul: [
+          "Changing the pitch deck was mostly creativity, because I had to decide how to tell the story.",
+          "Following up with clients and VCs was mostly execution, the same kind of work over and over until something happens.",
+          "Getting clients was both, since I had to pick who to ask and how to ask, and then keep asking."
+        ] },
+        "Looking at it this way, most of my 10 days was execution with some creativity in it. I think that's normal for a company that's already running. The class graded the creative part, and I didn't point it out well enough.",
+        { h: 'What counts as progress?' },
+        "Progress is the part I'm still stuck on. I made a lot of progress on the company and it didn't grade well, and I think that's because I haven't done a good job of learning what this class counts as progress. For now, my answer is that progress means something outside my head changed, like money, a person, or a decision. I don't think I have it all the way right yet.",
+        { h: 'Where I land' },
+        "I think a lot of what the class calls creativity is real, but I don't think you can separate it from execution. A creative idea nobody carries out doesn't do anything, and in a startup, carrying it out is where most of the work is."
+      ]
+    },
+    {
+      name: 'Resilience', title: 'Resilience', mindset: 'Resilience', mode: 'land', person: 'Me, on the court', sign: "I've got this",
+      chip: 'No rescue needed on this one',
+      body: [
+        "This was the one stop where I didn't need rescuing.",
+        "I have been building resilience my whole life, mostly through tennis and my childhood. I played tennis for 16 years, five of them on a team, and it taught me the importance of finishing what I need to do. In doubles, a lot of the job is still yours alone. I use that every day at FlexForm, and I felt like I did well on the resilience work in this class because I wasn't learning it for the first time.",
+        { h: 'The Rube Goldberg machine' },
+        "The Rube Goldberg machine was the one assignment where I didn't get much out of it. We built a machine, filmed our attempts, tried again, and listed out every step. I understand it was meant to be team building, but it felt kind of pointless to me, and I don't think my team learned much from it. The rubric was also ambiguous, so I wasn't sure what a good version looked like.",
+        "I'd rather say that honestly than act like it changed my life. The resilience I use in my company came from real things, and that's where I'd tell someone to look for it."
+      ]
+    },
+    {
+      name: 'StartupCincy', title: 'StartupCincy', mindset: 'Confidence', mode: 'rescue', person: 'Our team, in the Q&A', sign: 'Q&A?',
+      payload: 'industry knowledge',
+      body: [
+        "Confidence is the mindset I feel best about, and it's also where I found my biggest gap.",
+        "I'm comfortable meeting new people and I'm comfortable pitching. That showed up recently at StartupCincy, in the Cincinnati hard tech shark tank. One of the teams we went up against has $17.5M in ARR. That could have scared us, and it didn't. We were confident in our pitch.",
+        { h: 'The Q&A' },
+        "Then came the Q&A, with actual aerospace engineering professionals, and we struggled hard. Telling our story was one thing, and answering experts was another. We finished 5th out of 5 teams.",
+        { big: "We didn't need to be more creative, more resilient, or more confident. We needed more industry knowledge." },
+        { h: 'What I took from it' },
+        "Confidence got us through the pitch, but it couldn't answer the questions. This is a case where the mindsets in the book weren't the problem. The next thing FlexForm needs is industry knowledge, and it's something I wish this class gave more time to build. I can practice being confident, but I can't be confident about knowledge I don't have yet."
+      ]
+    },
+    {
+      name: 'FlexForm Team', title: 'The FlexForm Team', mindset: 'My team', mode: 'land', person: 'Sammy', sign: 'Hardware side',
+      chip: 'This stop helped me',
+      body: [
+        "If you asked my closest friends about me, they wouldn't talk about my pitch deck. They'd talk about Sammy and my work ethic. So this stop is about how Sammy and I work together, and I'm going to tell the story of FlexForm through that.",
+        { h: 'How we split it' },
+        "Sammy is my business partner at FlexForm. He runs the physical side, which is hardware, materials, and mechanical engineering. I run the software and the business side. The wing only works if both sides work, because the hardware has to be able to change shape and the software has to know when to change it.",
+        { h: 'How FlexForm started' },
+        "I started FlexForm in November 2025. The idea is a wing that changes its shape in flight, so a drone can fit its wing to the air instead of living with one fixed shape. We license the technology, and our focus is drones for defense. FlexForm has won two campus pitch competitions, the MUCAT design competition and Athena42, and we have a provisional patent and some grant funding.",
+        { h: 'What working together looks like' },
+        { ul: [
+          "The software I wrote decides how the wing should be shaped using things like wind speed, angle of attack, and temperature. It has three layers: one that makes the call, one that keeps it from flipping back and forth, and a physics check so it never asks the wing for something unsafe.",
+          "Sammy suggested we pick three or four set airfoil shapes for the wing to switch between and give the software numbers for each one. That gave my engine something clear to choose between.",
+          "Sammy ran simulations of airflow over the wing from negative 20 to positive 20 degrees angle of attack. Those numbers are what my software needs to compare the shapes.",
+          "When I ran the software with placeholder numbers, it showed that the curved shape couldn't beat the flat one anywhere in the flight range. That told both of us something we needed to hear. I can't tune the software any further until we have real measurements, so we're getting wind tunnel tests ready.",
+          "I also built a 3D model of the adaptive wing in Blender and a browser tool for looking at airfoils, and I plan to keep using both with Sammy so we're looking at the same thing."
+        ] },
+        { h: 'The long story so far' },
+        { tl: [
+          ['November 2025', 'I start FlexForm.'],
+          ['Along the way', 'Two campus pitch wins, a provisional patent, grant funding, and an SBIR application that is still pending. We also put together an advisory board that includes a former NASA person and the CEO of a drone company.'],
+          ['September 9, 2026', 'We meet Volynt Aero, a hybrid-electric drone company in Oxford, Ohio, about working together on a wing design.'],
+          ['September 17, 2026', 'A follow-up call with Volynt goes great, and we send them partnership agreements. They also ask me to advise on their preseed fundraising round, and Sammy looks at a mechanical engineering internship there.'],
+          ['October 2026', 'Cullan joins the FlexForm team on hardware and electrical work. We also get a referral to Dorm Room Fund and a first call gets scheduled.'],
+          ['Recently', 'StartupCincy, where we placed 5th of 5 and found out how much industry knowledge we still need.'],
+          ['January 21 to 22, 2027', 'The Wharton Aerospace conference in Philadelphia, paid for by the Miami Altman Institute. Sammy and I are both going.']
+        ] },
+        { h: 'What this shows about how we work' },
+        "When I look at all of this, the pattern is pretty simple. Sammy's numbers become my inputs, and what my software finds tells us what to measure next. Neither of us is sitting around waiting on the other, and when my engine hit a wall with the placeholder numbers, that told Sammy and me exactly what to test.",
+        "That also says something about how I work. I would rather be known for the work I put in every day than for how my pitch deck looks, and most of the progress I wrote about on this flight came from the two of us doing that."
+      ]
+    },
+    {
+      name: 'Landing', title: "Where I didn't fit", mindset: 'Growth', mode: 'rescue', person: 'Me, doing both', sign: 'Class or company?',
+      payload: 'room to work on my startup',
+      body: [
+        { h: "Where this class and I didn't match" },
+        "I'll be straight about this. FlexForm comes first for me, and I know it takes priority over my schoolwork, so I wish the class gave me more room to work on it. I also wish there were more examples of how this work applies to real startups. The examples in the book are mostly corporate, and a lot of what I deal with is a small team trying to get a company off the ground.",
+        "The class also contradicted how I work. It values creativity and reflection, and I value doing things and making progress. In my opinion, with AI, execution matters a lot more than reflection does now.",
+        { h: "What I'm changing" },
+        "I need to be more creative when I present FlexForm's solution, and the pitch deck is where I'll start. I also got a lot better at taking feedback. The next thing I need is more industry knowledge, so the next time aerospace engineers ask us questions, we're ready.",
+        { h: "What I'm taking from this class" },
+        { ul: [
+          "Doing the work and showing the work are different skills, and I need to get better at the second one.",
+          "Progress needs a definition, and I'm still working on mine.",
+          "Confidence isn't enough without industry knowledge.",
+          "Creativity and execution aren't separate, and I want to get better at pointing out the creative parts of what I do."
+        ] },
+        "That's the end of the flight."
+      ]
+    }
+  ];
+
+  var SHORT = [
+    'A drone company builds its portfolio as a drone flight.',
+    'I got a lot done in 10 days. The grade said I created nothing new.',
+    'Creativity decides what to make. Execution does it again and again.',
+    'Tennis taught me to finish what I start. This stop needed no rescue.',
+    '5th of 5. We had the confidence. We needed the industry knowledge.',
+    'Sammy runs the hardware. I run the software. That is how FlexForm got built.',
+    'FlexForm comes first for me, and I know what I need to change.'
+  ];
+
+  var N = STOPS.length, H = 450, BASE = 382;
+  function SX(i) { return 360 + i * 620; }
+  var WORLD_W = SX(N - 1) + 700;
+  var vbW = 900;
+
+  var svg = document.getElementById('scene');
+  function mk(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function txt(parent, cls, x, y, str, anchor) {
+    var t = mk('text', { 'class': cls, x: x, y: y, 'text-anchor': anchor || 'start' }, parent);
+    t.textContent = str;
+    return t;
+  }
+
+  /* Geometry for each stop: where the person stands and where the drone ends up. */
+  var geo = [
+    { px: SX(0) + 20, py: BASE },
+    { px: SX(1) + 60, py: BASE - 120 },
+    { px: SX(2) + 40, py: BASE - 90 },
+    { px: SX(3) + 30, py: BASE },
+    { px: SX(4) + 30, py: BASE - 40 },
+    { px: SX(5) + 20, py: BASE },
+    { px: SX(6) + 40, py: BASE }
+  ];
+  geo.forEach(function (g, i) {
+    if (i === 0) { g.dx = g.px; g.dy = g.py - 16; }
+    else if (STOPS[i].mode === 'land') { g.dx = g.px - 60; g.dy = g.py - 16; }
+    else { g.dx = g.px; g.dy = Math.max(70, g.py - 130); }
+  });
+
+  /* Layers */
+  var far = mk('g', {}, svg), clouds = mk('g', {}, svg), world = mk('g', {}, svg);
+  var people = mk('g', {}, svg), drone = mk('g', { id: 'drone' }, svg);
+
+  var pts = '0,450';
+  for (var x = 0; x <= WORLD_W; x += 40) pts += ' ' + x + ',' + (300 + 30 * Math.sin(x / 180) + 20 * Math.sin(x / 70));
+  pts += ' ' + WORLD_W + ',450';
+  mk('polygon', { 'class': 'far', points: pts }, far);
+
+  for (var c = 0; c < WORLD_W; c += 330) {
+    var cy = 60 + ((c / 330) % 3) * 38;
+    mk('ellipse', { 'class': 'cloud', cx: c + 80, cy: cy, rx: 52, ry: 13 }, clouds);
+    mk('ellipse', { 'class': 'cloud', cx: c + 112, cy: cy - 9, rx: 30, ry: 11 }, clouds);
+  }
+
+  var gp = '0,450';
+  for (var gx = 0; gx <= WORLD_W; gx += 40) gp += ' ' + gx + ',' + (BASE + 10 + 6 * Math.sin(gx / 260));
+  gp += ' ' + WORLD_W + ',450';
+  mk('polygon', { 'class': 'ground', points: gp }, world);
+
+  /* Props for each stop */
+  (function () {
+    var s;
+    /* 0: pad and hangar */
+    s = SX(0);
+    mk('rect', { 'class': 'prop', x: s - 200, y: BASE - 74, width: 110, height: 78 }, world);
+    txt(world, 'sign-text', s - 145, BASE - 32, 'FLEXFORM', 'middle');
+    mk('rect', { 'class': 'pad', x: s - 70, y: BASE - 4, width: 180, height: 8, rx: 2 }, world);
+
+    /* 1: office building with a rooftop */
+    s = SX(1);
+    mk('rect', { 'class': 'prop', x: s - 10, y: BASE - 120, width: 150, height: 124 }, world);
+    for (var r = 0; r < 3; r++) for (var cc = 0; cc < 4; cc++) {
+      mk('rect', { 'class': 'win', x: s + 8 + cc * 32, y: BASE - 96 + r * 32, width: 16, height: 14 }, world);
+    }
+    txt(world, 'sign-text', s + 65, BASE - 126, 'OFFICE HOURS', 'middle');
+
+    /* 2: rock with a stuck pitch deck */
+    s = SX(2);
+    mk('polygon', { 'class': 'rock', points: (s - 30) + ',' + (BASE + 4) + ' ' + (s + 10) + ',' + (BASE - 90) + ' ' + (s + 90) + ',' + (BASE - 90) + ' ' + (s + 130) + ',' + (BASE + 4) }, world);
+    mk('rect', { 'class': 'paper', x: s + 70, y: BASE - 112, width: 28, height: 20 }, world);
+    mk('line', { x1: s + 75, y1: BASE - 106, x2: s + 93, y2: BASE - 106, stroke: 'var(--accent)', 'stroke-width': 2 }, world);
+    mk('line', { x1: s + 75, y1: BASE - 100, x2: s + 87, y2: BASE - 100, stroke: 'var(--accent)', 'stroke-width': 2 }, world);
+
+    /* 3: tennis court */
+    s = SX(3);
+    mk('rect', { 'class': 'court', x: s - 90, y: BASE - 2, width: 280, height: 8, rx: 2 }, world);
+    mk('rect', { 'class': 'prop', x: s + 100, y: BASE - 26, width: 4, height: 28 }, world);
+    mk('rect', { 'class': 'win', x: s + 104, y: BASE - 26, width: 22, height: 14 }, world);
+    mk('circle', { 'class': 'ball', cx: s + 160, cy: BASE - 7, r: 5 }, world);
+
+    /* 4: canyon with a pillar */
+    s = SX(4);
+    mk('rect', { 'class': 'canyon', x: s - 40, y: BASE + 2, width: 190, height: 100 }, world);
+    mk('rect', { 'class': 'rock', x: s - 140, y: BASE - 22, width: 100, height: 130 }, world);
+    mk('rect', { 'class': 'rock', x: s + 150, y: BASE - 22, width: 100, height: 130 }, world);
+    mk('rect', { 'class': 'rock', x: s + 5, y: BASE - 40, width: 55, height: 140 }, world);
+    txt(world, 'sign-text', s + 55, BASE + 60, 'THE Q&A CANYON', 'middle');
+
+    /* 5: workbench with a wing */
+    s = SX(5);
+    mk('rect', { 'class': 'prop', x: s + 70, y: BASE - 36, width: 140, height: 8 }, world);
+    mk('rect', { 'class': 'prop', x: s + 78, y: BASE - 28, width: 6, height: 28 }, world);
+    mk('rect', { 'class': 'prop', x: s + 196, y: BASE - 28, width: 6, height: 28 }, world);
+    mk('ellipse', { 'class': 'foil', cx: s + 140, cy: BASE - 45, rx: 40, ry: 8 }, world);
+
+    /* 6: landing pad with the FlexForm sign */
+    s = SX(6);
+    mk('rect', { 'class': 'pad', x: s - 50, y: BASE - 4, width: 210, height: 8, rx: 2 }, world);
+    mk('rect', { 'class': 'prop', x: s + 114, y: BASE - 40, width: 4, height: 40 }, world);
+    mk('rect', { 'class': 'prop', x: s + 88, y: BASE - 74, width: 100, height: 28 }, world);
+    txt(world, 'sign-text', s + 138, BASE - 55, 'FLEXFORM', 'middle');
+  })();
+
+  /* People */
+  var persons = [];
+  STOPS.forEach(function (s, i) {
+    if (!s.person) { persons.push(null); return; }
+    var g = geo[i];
+    var grp = mk('g', { 'class': 'p ' + (s.mode === 'rescue' ? 'stranded' : 'ok'), transform: 'translate(' + g.px + ',' + g.py + ')' }, people);
+    var w = s.sign.length * 6.6 + 16;
+    mk('rect', { 'class': 'bub', x: -w / 2, y: -82, width: w, height: 20, rx: 3 }, grp);
+    var bt = txt(grp, 'bubt', 0, -68, s.sign, 'middle');
+    mk('circle', { 'class': 'fig', cx: 0, cy: -38, r: 6 }, grp);
+    mk('line', { 'class': 'fig', x1: 0, y1: -32, x2: 0, y2: -14 }, grp);
+    mk('line', { 'class': 'fig', x1: 0, y1: -14, x2: -6, y2: 0 }, grp);
+    mk('line', { 'class': 'fig', x1: 0, y1: -14, x2: 6, y2: 0 }, grp);
+    mk('line', { 'class': 'fig', x1: 0, y1: -28, x2: -9, y2: -18 }, grp);
+    var arm = mk('g', { 'class': 'arm' }, grp);
+    mk('line', { 'class': 'fig', x1: 0, y1: -28, x2: 10, y2: -42 }, arm);
+    txt(grp, 'nm', 0, 20, s.person, 'middle');
+    persons.push({ grp: grp, bt: bt });
+  });
+
+  /* Drone */
+  mk('line', { 'class': 'd-arm', x1: -26, y1: -2, x2: 26, y2: -2 }, drone);
+  mk('ellipse', { 'class': 'rotor', cx: -26, cy: -8, rx: 15, ry: 2.5 }, drone);
+  mk('ellipse', { 'class': 'rotor', cx: 26, cy: -8, rx: 15, ry: 2.5 }, drone);
+  var tether = mk('line', { 'class': 'tether', x1: 0, y1: 8, x2: 0, y2: 8, visibility: 'hidden' }, drone);
+  var crate = mk('rect', { 'class': 'crate', x: -8, y: 8, width: 16, height: 12, rx: 2, visibility: 'hidden' }, drone);
+  mk('rect', { 'class': 'd-body', x: -12, y: -6, width: 24, height: 12, rx: 4 }, drone);
+  mk('circle', { 'class': 'd-cam', cx: 0, cy: 8, r: 3 }, drone);
+  mk('line', { 'class': 'd-arm', x1: -14, y1: 10, x2: -14, y2: 16 }, drone);
+  mk('line', { 'class': 'd-arm', x1: 14, y1: 10, x2: 14, y2: 16 }, drone);
+
+  /* State */
+  var cur = { x: geo[0].dx, y: geo[0].dy };
+  var tw = null, resc = null, camX = 0, busy = false, idx = 0, landed = true;
+  var rescued = {};
+  drone.setAttribute('class', 'landed');
+
+  function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+
+  function setSize() {
+    var w = svg.parentNode.clientWidth || 900;
+    vbW = w < 560 ? 520 : 900;
+    svg.style.aspectRatio = vbW + ' / ' + H;
+  }
+
+  function markRescued(i) {
+    var p = persons[i];
+    if (!p || rescued[i]) return;
+    rescued[i] = true;
+    p.grp.setAttribute('class', 'p ok');
+    p.bt.textContent = 'Noted';
+  }
+
+  function frame(ts) {
+    if (tw) {
+      var t = Math.max(0, Math.min(1, (ts - tw.t0) / tw.dur));
+      var e = ease(t);
+      cur.x = tw.fx + (tw.tx - tw.fx) * e;
+      cur.y = tw.fy + (tw.ty - tw.fy) * e - Math.sin(Math.PI * e) * tw.arc;
+      if (t >= 1) { var done = tw.done; tw = null; if (done) done(); }
+    }
+    var bob = (!tw && !landed && !RM) ? Math.sin(ts / 320) * 3 : 0;
+    drone.setAttribute('transform', 'translate(' + cur.x.toFixed(1) + ',' + (cur.y + bob).toFixed(1) + ')');
+
+    if (resc) {
+      var p = Math.max(0, Math.min(1, (ts - resc.t0) / resc.dur));
+      var len = resc.L * (p < 0.4 ? p / 0.4 : (p < 0.75 ? 1 : (1 - p) / 0.25));
+      tether.setAttribute('visibility', 'visible');
+      tether.setAttribute('y2', 8 + len);
+      crate.setAttribute('y', 8 + len);
+      crate.setAttribute('visibility', p < 0.55 ? 'visible' : 'hidden');
+      if (p >= 0.55 && !resc.marked) { resc.marked = true; markRescued(resc.i); revealChip(); }
+      if (p >= 1) {
+        tether.setAttribute('visibility', 'hidden');
+        crate.setAttribute('visibility', 'hidden');
+        resc = null; busy = false; setControls();
+      }
+    }
+
+    var target = Math.max(0, Math.min(WORLD_W - vbW, cur.x - vbW * 0.42));
+    camX += (target - camX) * (RM ? 1 : 0.14);
+    svg.setAttribute('viewBox', camX.toFixed(1) + ' 0 ' + vbW + ' ' + H);
+    far.setAttribute('transform', 'translate(' + (camX * 0.6).toFixed(1) + ',0)');
+    clouds.setAttribute('transform', 'translate(' + (camX * 0.8).toFixed(1) + ',0)');
+    requestAnimationFrame(frame);
+  }
+
+  /* Card */
+  var card = document.getElementById('card');
+  function paras(list) {
+    return list.map(function (b) {
+      if (typeof b === 'string') return '<p>' + b + '</p>';
+      if (b.big) return '<p class="big">' + b.big + '</p>';
+      if (b.h) return '<h3>' + b.h + '</h3>';
+      if (b.tl) return '<ol class="tl">' + b.tl.map(function (x) { return '<li><span class="when">' + x[0] + '</span><span>' + x[1] + '</span></li>'; }).join('') + '</ol>';
+      if (b.ul) return '<ul>' + b.ul.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+      return '';
+    }).join('');
+  }
+  function chipText(s) {
+    return s.mode === 'rescue' ? 'What would have helped: ' + s.payload : s.chip;
+  }
+  function showCard(i) {
+    var s = STOPS[i];
+    var hasChip = (s.mode === 'rescue') || !!s.chip;
+    document.getElementById('hud').innerHTML = '<p class="tag">Stop ' + (i + 1) + ' of ' + N + ' &middot; ' + s.name + '</p><p class="hud-line">' + SHORT[i] + '</p>';
+    card.innerHTML = '<p class="tag">Stop ' + (i + 1) + ' of ' + N + ' &middot; ' + s.mindset + ' &middot; the full story</p><h2>' + s.title + '</h2>' + paras(s.body) +
+      (hasChip ? '<span class="chip" id="chip"' + (s.mode === 'rescue' && !rescued[i] ? ' hidden' : '') + '>' + chipText(s) + '</span>' : '');
+  }
+  function revealChip() {
+    var c = document.getElementById('chip');
+    if (c) c.hidden = false;
+  }
+
+  /* Controls */
+  var nextBtn = document.getElementById('next');
+  var backBtn = document.getElementById('back');
+  var navEl = document.getElementById('stops');
+  var navBtns = [];
+  STOPS.forEach(function (s, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = s.name;
+    b.addEventListener('click', function () { go(i); });
+    navEl.appendChild(b);
+    navBtns.push(b);
+  });
+  function setControls() {
+    backBtn.disabled = busy || idx === 0;
+    nextBtn.disabled = busy;
+    nextBtn.textContent = idx === 0 && landed && !visitedAny ? 'Fly to the first stop' : (idx < N - 1 ? 'Fly to the next stop' : 'Fly back to takeoff');
+    navBtns.forEach(function (b, i) {
+      b.disabled = busy;
+      if (i === idx) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+    });
+  }
+  var visitedAny = false;
+
+  function arrive(i) {
+    var s = STOPS[i];
+    showCard(i);
+    if (s.mode === 'land') {
+      landed = true;
+      drone.setAttribute('class', 'landed');
+      busy = false;
+      setControls();
+    } else if (rescued[i]) {
+      busy = false;
+      setControls();
+    } else {
+      resc = { i: i, t0: performance.now(), dur: RM ? 1 : 1700, L: (geo[i].py - 46) - (cur.y + 8), marked: false };
+    }
+  }
+
+  function go(i) {
+    if (busy || i < 0 || i >= N) return;
+    if (i === idx && visitedAny) return;
+    busy = true;
+    visitedAny = true;
+    landed = false;
+    drone.setAttribute('class', '');
+    idx = i;
+    setControls();
+    var g = geo[i];
+    var dist = Math.abs(g.dx - cur.x);
+    tw = {
+      t0: performance.now(),
+      dur: RM ? 1 : Math.min(3400, 1100 + dist * 0.7),
+      fx: cur.x, fy: cur.y, tx: g.dx, ty: g.dy,
+      arc: RM ? 0 : 60,
+      done: function () { arrive(i); }
+    };
+  }
+
+  nextBtn.addEventListener('click', function () { go(idx < N - 1 ? idx + 1 : 0); });
+  backBtn.addEventListener('click', function () { go(idx - 1); });
+
+  /* Read-all view */
+  var allEl = document.getElementById('all');
+  allEl.innerHTML = STOPS.map(function (s, i) {
+    return '<article><p class="tag">Stop ' + (i + 1) + ' of ' + N + ' &middot; ' + s.mindset + '</p><h2>' + s.title + '</h2>' + paras(s.body) + '</article>';
+  }).join('');
+  var readBtn = document.getElementById('readall');
+  readBtn.addEventListener('click', function () {
+    allEl.hidden = !allEl.hidden;
+    readBtn.textContent = allEl.hidden ? 'Skip the flight and read everything' : 'Hide the full text';
+  });
+
+  window.addEventListener('resize', setSize);
+  setSize();
+  showCard(0);
+  setControls();
+  requestAnimationFrame(frame);
+})();
+</script>
+
+</body></html>
